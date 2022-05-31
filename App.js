@@ -1,20 +1,98 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
+import React from 'react';
+import { NavigationContainer  } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from "react-native-vector-icons/Ionicons";
+
+
+
+import Sales from './src/vendas';
+
+//import Storage from './src/estoque';
+
+import Relatorio from './src/relatorioVendas';
+
+
+
+const Tab    = createBottomTabNavigator();
+
+
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+
+
+  return (  
+    
+     
+ <NavigationContainer>
+       
+   <Tab.Navigator
+
+
+initialRouteName='Sales' 
+
+ screenOptions={({ route })=>({
+
+  headerShown: false, 
+
+
+
+   tabBarActiveBackgroundColor:'rgba(205, 205, 103, 0.8)',   
+   tabBarInactiveBackgroundColor:'rgba(205, 205, 103, 0.5)',
+
+
+   tabBarActiveTintColor:'rgba(125, 105, 53, 0.8)',
+   tabBarInactiveTintColor:'rgba(125, 105, 53, 0.9)',
+
+
+
+   tabBarIcon : ( { color, size} ) => {
+
+     let iconName;    
+
+      switch(route.name){
+        case "Relatorio":
+          iconName ="home" ;
+          color="brown";
+          break;
+        case "Sales":
+          //iconName="list" ;
+          iconName="globe" ;
+          color="brown";
+         break;
+         /* case "Estoque":
+          iconName="grid";
+          break; */
+      }
+      return <Ionicons name ={iconName}size ={size} color ={color}/>;
+    }, 
+  })}   
+
+   /*  tabBarOptions={{
+      activeTintColor:"#cc0000",
+      inactiveTintColor:"#ff3333",      
+      activeBackgroundColor:"rgba(255, 153, 51, 0.7)",
+      inactiveBackgroundColor:"rgba(255, 153, 51, 0.5)",      
+  }}  */
+ 
+
+   
+
+
+
+
+  >    
+    <Tab.Screen name='Sales'     component={Sales}/>
+    <Tab.Screen name='Relatorio' component={Relatorio}/>
+    
+
+   </Tab.Navigator>
+
+ </NavigationContainer>
+ 
+    
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+ 
