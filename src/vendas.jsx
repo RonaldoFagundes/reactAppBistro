@@ -608,14 +608,76 @@ const pgtoCartao=(pgCt,value)=>{
 
 
 
-   
 
 
 
 
 
-       
+
+// enviando info para o table teste_1//
+var vendas = new Array();   
+    
+var absOne = 0;
+
+   if (absOne>0){
+
+for( var i=0; i < 1; i++) {
+
+   vendas.push("Banoffee")  
+   vendas.push(12)
+   vendas.push(10)
+   vendas.push(1)   
+   vendas.push(3)
+   vendas.push(36)  
+   vendas.push(4)
+   vendas.push(48)
+   vendas.push(84)   
+}
+
+
+for( var i=0; i < 1; i++) {
+
+  vendas.push("Pudim")  
+  vendas.push(15)
+  vendas.push(10)
+  vendas.push(2)   
+  vendas.push(5)
+  vendas.push(75)  
+  vendas.push(3)
+  vendas.push(45)
+  vendas.push(120)  
+
+ }
+
+ }else{
+
+
+ for( var i=0; i < 1; i++) {
+
+  vendas.push("Pudim")  
+  vendas.push(15)
+  vendas.push(10)
+  vendas.push(2)   
+  vendas.push(5)
+  vendas.push(75)  
+  vendas.push(3)
+  vendas.push(45)
+  vendas.push(120)  
+
+ }
+
+ }
+
+
+
+
+
+
+
+
+  // enviando info para o table teste_2 //     
 var prodtosNome = [];
+
 var prodtosPreco = [];
 var prodtosAbas = [];
 var prodtosNot = [];
@@ -626,19 +688,21 @@ var prodtosCtVa = [];
 var prodtosTotal = [];
 
 
-prodtosNome.push('Banoffee');
-prodtosNome.push('Banoffee');
-prodtosNome.push('Banoffee');
-prodtosNome.push('Banoffee');
-prodtosNome.push('Banoffee');
+var prodOneAb = 0;
 
-
+    if (prodOneAb>0){
+prodtosNome.push('Banoffee');
+    }
+   else{
+prodtosNome.push('pudim');
+prodtosNome.push('pote');
+prodtosNome.push('geleia');
+prodtosNome.push('torta');
+   }
 
 for (let i = 0; i < prodtosNome.length; i++) {
 
          prodtosNome[i];
-
-
 }
 
 
@@ -666,6 +730,7 @@ const html = `
  <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
   
+   
   <style>
 		#div {
 			width: 1000px;
@@ -704,7 +769,10 @@ const html = `
 			padding: 2px;
 		}
 	</style>
+
+
  </head>
+
     
   <body style="text-align: center;">
 
@@ -771,45 +839,47 @@ const html = `
             
 
         <tr>
-	         <td>${prod_one}</td>
-	         <td>${produtoOne.preco}</td>
-	         <td>${produtoOne.abastecimento}</td>
-	         <td>01</td>
-	   
-	         <td colspan="3">${produtoOne.qtdDn}</td>	   
-	         <td colspan="4">${produtoOne.pgtoDn}</td>
-	   
-	         <td colspan="3">${produtoOne.qtdCt}</td>	   
-	         <td colspan="4">${produtoOne.pgtoCt}</td>
-	 
-	         <td>${produtoOne.totalAll}</td>
+	         <td>${vendas[0]}</td>
+           	         
+           <td>${vendas[1]}</td>	         
+    
+           <td>${vendas[2]}</td>	         
+ 
+           <td>${vendas[3]}</td>	         
+
+           <td colspan="3">${vendas[4]}</td>	 
+
+           <td colspan="4">${vendas[5]}</td>	 
+
+           <td  colspan="3">${vendas[6]}</td>	 
+
+           <td  colspan="4">${vendas[7]}</td>	 
+
+           <td>${vendas[8]}</td>
         </tr>
+
+
+
+       <tr>
+        <td>${vendas[9]}</td>
+                   
+        <td>${vendas[10]}</td>	         
+ 
+        <td>${vendas[11]}</td>	         
+
+        <td>${vendas[12]}</td>	         
+
+        <td colspan="3">${vendas[13]}</td>	 
+
+        <td colspan="4">${vendas[14]}</td>	 
+
+        <td  colspan="3">${vendas[15]}</td>	 
+
+        <td  colspan="4">${vendas[16]}</td>	 
+
+        <td>${vendas[17]}</td>
+     </tr>
           
-
-        <tr>
-          <td>
-            ${prodtosNome}
-           </td>
-        </tr>
-
-        <tr>
-         <td>
-          ${prodtosNome}
-         </td>
-       </tr>
-
-      <tr>
-        <td>
-         ${prodtosNome}
-        </td>
-    </tr>
-
-
-
-
-
-
-        
         </tbody>  
         <tfoot></tfoot>  
       </table>  
@@ -817,10 +887,20 @@ const html = `
  
 
 
-  
+
    
 
+       
+       
 
+     
+
+    
+
+        
+         
+   
+    
 
 
   </body>
