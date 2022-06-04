@@ -2,12 +2,7 @@ import {StyleSheet , StatusBar} from 'react-native';
 
 
 
-export default StyleSheet.create({ 
-   
-    gradienteHeader:{
-         flex:1
-    },
-    
+export default StyleSheet.create({   
 
     containnerBody:{
        flex: 1,
@@ -18,18 +13,12 @@ export default StyleSheet.create({
 
      viewHeader:{
          width:'auto',
-         maxHeight:100,   
-         /*      
-         backgroundColor: 'rgba(255, 255, 223, 0.7)',
-         backgroundImage: 'linear-gradient(to top, transparent, rgba(251, 195, 95, 0.9))',
-         boxShadow: '5px 5px 8px 5px rgba(0, 0, 0, 0.4)',
-         */
-
-
+         maxHeight:100,         
+        // boxShadow: '5px 5px 8px 5px rgba(0, 0, 0, 0.4)',    
          flexDirection:'row',
          alignItems:'center',
-         padding:10
-     },      
+         padding:10,
+          },      
 
 
 
@@ -64,29 +53,30 @@ export default StyleSheet.create({
     containnerMain:{
         width:'100%',
         maxHeight:1200,
-        flex:1, 
-        backgroundColor: 'rgba(175, 55, 23, 0.8)',
+        flex:1,      
         flexDirection:'column',
         justifyContent:'center',
-        alignItems:'center'       
+        alignItems:'center',
+        
      },
 
 
 
 
     containnerProduto:{
-        width:'99%',
-        minHeight:230,      
+        width:'97%',
+
+       // minHeight:230, 
         backgroundColor: 'rgba(255, 255, 223, 0.7)',
-        marginTop:10,   
-        
+
+        marginTop:10,         
         padding:5,
         alignItems:'center',        
         borderWidth:2,
         borderStyle:'solid',
         borderColor:'black',
-        borderRadius: 30,
-        shadowRadius: 10    
+        borderRadius: 35,
+      //  shadowRadius: 10    
     },
 
    
@@ -95,10 +85,12 @@ export default StyleSheet.create({
 
     viewProduto:{
         width:'98%',
-        maxHeight:400,       
+        maxHeight:400,  
+
         backgroundColor: 'rgba(255, 255, 223, 0.7)',
         backgroundImage: 'linear-gradient(to top, transparent, rgba(251, 195, 95, 0.9))',
         boxShadow: '5px 5px 8px 5px rgba(0, 0, 0, 0.4)',
+
         flexDirection: "row",        
         alignItems:'center',
         justifyContent:'space-evenly',
@@ -227,11 +219,12 @@ export default StyleSheet.create({
     viewSubTotal:{
         width:'95%',
         maxHeight:100,
+
         backgroundColor: 'rgba(255, 255, 223, 0.7)',
         backgroundImage: 'linear-gradient(to top, transparent, rgba(251, 195, 95, 0.9))',
         boxShadow: '5px 5px 8px 5px rgba(0, 0, 0, 0.4)',
-        marginTop:5, 
 
+        marginTop:5, 
         textAlign:'center',
         borderRadius: 30,
         shadowRadius: 10   
@@ -245,14 +238,15 @@ export default StyleSheet.create({
     viewAmount:{
         width:'97%',
         maxHeight:400,
-        backgroundColor: 'rgba(255, 255, 223, 0.7)',       
+
+        backgroundColor: 'rgba(255, 255, 223, 0.7)',   
+
         padding:5,
         alignItems:'center',
         marginTop:10,
         borderWidth:2,
         borderStyle:'solid',
-        borderColor:'black',
-        
+        borderColor:'black',        
         shadowRadius: 10,
         borderRadius: 30,
         shadowRadius: 10      

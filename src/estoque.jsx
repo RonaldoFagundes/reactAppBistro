@@ -1,7 +1,7 @@
 import React from 'react';
-import { SafeAreaView, View,  Button, Platform, Text } from 'react-native';
-
-
+import { SafeAreaView,ScrollView, View,  Button,  Text, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import Estilos from '../styles/estilos';
 
 import * as Print from 'expo-print';
 import { shareAsync } from 'expo-sharing';
@@ -12,7 +12,7 @@ import { shareAsync } from 'expo-sharing';
 
 
 
-export default function RelatorioVendas(){
+export default function Estoque(){
 
 
 
@@ -138,28 +138,57 @@ const html = `
 
   return (
 
+   <SafeAreaView  style={Estilos.containnerBody}> 
+
+    <ScrollView >
+    
+
+
+    {/* header */}
+    
+  <LinearGradient 
+    
+    colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']} 
+     style={{flex:1}}
+     
+     >
+     <View style={Estilos.viewHeader}> 
+        <View style={Estilos.viewImgHeader}>
+          <Image 
+           source={require('../assets/logo.jpg')}
+           style={Estilos.imgHeader}
+         />   
+        </View>
+        <View style={Estilos.viewTextHeader}>
+           <Text style={Estilos.textHeader}>Bistrô di Totta</Text>
+        </View>
+     </View>
+    
+  </LinearGradient>
+
   
+   <LinearGradient
+    colors={['rgba(111, 0, 0, 1)', 'rgba(140, 51, 51,0.8)','rgba(115, 0, 0, 0.7)']} 
+    style={{flex:1}}>
+
+   <View style={{
+     minHeight:700,
+     flexDirection:'column',
+     justifyContent:'center',
+     alignItems:'center'
+       }}>
+
+     <Text style={{color:'white',fontSize:30}}>Tela Estoque</Text>
 
 
-    <View style={{backgroundColor:'blue'}}>
+    {/*  <View/>        
+       
+           <Button title='Print ios' onPress={print}  /> 
 
-    <View><Text>Tela Relatório</Text></View>
-
-
-      {/* <Button title='Print ios' onPress={print}  /> */}
-
+           <Button title='Print to PDF file ' onPress={printToFile}/>  
 
 
-      <View style={{margin:50}} />
-
-
-
-      <Button title='Print to PDF file ' onPress={printToFile}/>
-
-
-
-
-{/*       {Platform.OS === 'ios' &&
+       {Platform.OS === 'ios' &&
         <>
           <View style={{margin:50}} />
           <Button title='Select printer' onPress={selectPrinter}/>
@@ -169,12 +198,24 @@ const html = `
           {selectedPrinter ? 
           <Text style={styles.printer}>{`Selected printer: ${selectedPrinter.name}`}</Text> : undefined}
         </>
-      } */}
+      } 
+
+    </View> */}
 
 
-    </View>
 
+
+
+         </View>
+
+      </LinearGradient>
     
+
+     </ScrollView>
+
+   </SafeAreaView>
+
+
   );
 
 

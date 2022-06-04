@@ -17,6 +17,10 @@ const prod_one = 'banoffee';
 const prod_two = 'puddim';
 const prod_three ='mousse';
 
+
+
+
+
   const[produtoOne, setProdutoOne] = useState({
     count:0,
     preco:12, 
@@ -26,7 +30,8 @@ const prod_three ='mousse';
     pgtoCt:0,
     qtdCt:0,
     totalCt:0,
-    totalAll:0
+    totalAll:0,
+    abastecimento:'10'
 });
 
 
@@ -55,12 +60,159 @@ const[produtoThree, setProdutoThree] = useState({
 });
 
 
+    // metodos asynStorage
+const setAbastecer =  (key,value)=>{
+  AsyncStorageSales.setItem(key,value);
+}
+
+const getAbastecer = async(key)=>{ 
+   
+  const quantidade =  parseInt (await AsyncStorageSales.getItem(key));
+
+          if (key == prod_one){
+
+            setProdutoOne({
+              ...produtoOne, count :(quantidade )
+            })
+
+          }  
+
+   }
+
+
+   const setAdd =  (key,value)=>{
+    AsyncStorageSales.setItem(key,value);
+  }
+
+  const getAdd = async(key)=>{  
+
+    const valor =  parseInt (await AsyncStorageSales.getItem(key));
+
+    if (key == prod_one){
+
+    setProdutoOne({
+      ...produtoOne,count:(produtoOne.count + valor)
+    })
+
+    }
+  }
+
+
+  const setRemove =  (key,value)=>{
+    AsyncStorageSales.setItem(key,value);
+  }
+
+  const getRemove = async(key)=>{  
+
+    const valor =  parseInt (await AsyncStorageSales.getItem(key));
+
+    if (key == prod_one & produtoOne.count>=1){
+
+    setProdutoOne({
+      ...produtoOne,count:(produtoOne.count - valor)
+    })
+
+    }
+  }
+
+
+  const setZerar =  (key,value)=>{
+    AsyncStorageSales.setItem(key,value);
+  }
+
+  const getZerar = async(key)=>{ 
+     
+    const valor =  parseInt (await AsyncStorageSales.getItem(key));
+
+    if (key == prod_one){
+  setProdutoOne({
+    ...produtoOne,count:(0),
+       produtoOne,pgtoDn:(produtoOne.pgtoDn = valor) ,
+       produtoOne,qtdDn:(produtoOne.qtdDn = valor),
+       produtoOne,pgtoCt:(produtoOne.pgtoCt =valor),
+       produtoOne,qtdCt:(produtoOne.qtdCt =valor),
+       produtoOne,totalAll:(produtoOne.totalAll =valor)
+  })
+  }
+}
+  
+   
+const setPgtoDn =  (key,value)=>{
+  AsyncStorageSales.setItem(key,value);
+}
+
+const getPgtoDn = async(key)=>{ 
+   
+  const valor =  parseInt (await AsyncStorageSales.getItem(key));
+
+
+  if ( key == prod_one & produtoOne.count>=1 ){
+
+
+setProdutoOne({
+  ...produtoOne,count:(produtoOne.count -valor) ,    
+     produtoOne,pgtoDn:(produtoOne.pgtoDn + produtoOne.preco) ,
+     produtoOne,qtdDn:(produtoOne.qtdDn+valor),
+     produtoOne,totalAll:(produtoOne.totalAll = produtoOne.pgtoDn + produtoOne.pgtoCt + produtoOne.preco)  
+  }) 
+
+}
+
+}
+
+
+
+const setPgtoCt =  (key,value)=>{
+  AsyncStorageSales.setItem(key,value);
+}
+
+const getPgtoCt = async(key)=>{ 
+   
+  const valor =  parseInt (await AsyncStorageSales.getItem(key));
+
+
+  if ( key == prod_one & produtoOne.count>=1 ){
+
+
+    setProdutoOne({
+      ...produtoOne,count:(produtoOne.count -valor) , 
+         produtoOne,pgtoCt:(produtoOne.pgtoCt + produtoOne.preco),
+         produtoOne,qtdCt:(produtoOne.qtdCt+valor),
+         produtoOne,totalAll:(produtoOne.totalAll = produtoOne.pgtoCt + produtoOne.pgtoDn + produtoOne.preco )
+     })
+
+  }
+
+}
 
 
 
 
 
-const storage = (key,value)=>{
+
+
+   const clearStorage =()=>{
+    AsyncStorageSales.clear(); 
+
+    setProdutoOne({
+      ...produtoOne, count :(0)
+    })
+  }
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+/* const storage = (key,value)=>{
     AsyncStorageSales.setItem(key,value);
 }
 
@@ -75,9 +227,6 @@ const fillStorage = async(key)=>{
    }
 
 
-
-
-
    const addStorage = async(key)=>{  
    
     const saldo =  parseInt(await AsyncStorageSales.getItem(key));
@@ -86,9 +235,6 @@ const fillStorage = async(key)=>{
            ...produtoTwo, count :(saldo + produtoTwo.count )
          })
      }
-
-
-
 
      const removeStorage = async(key)=>{     
       const saldo =  parseInt(await AsyncStorageSales.getItem(key));
@@ -100,28 +246,13 @@ const fillStorage = async(key)=>{
 
 
 
-
-   const clearStorage =()=>{
-    AsyncStorageSales.clear(); 
-
-    setProdutoTwo({
-      ...produtoOne, count :(0)
-    })
-  }
-
-
-
-
-
    const setDn = (key,value)=>{
     AsyncStorageSales.setItem(key,value);
   }
 
 const calcDn = async(key)=>{      
     const saldo =  parseFloat( await AsyncStorageSales.getItem(key) );
-
-           
-
+    
            setProdutoOne({
            ...produtoOne, preco :(saldo)
          })        
@@ -133,7 +264,12 @@ const calcDn = async(key)=>{
         setProdutoOne({
           ...produtoOne, preco :(0)
         })
-      }
+      } */
+
+
+
+
+
 
 
  /*
@@ -188,7 +324,9 @@ const surchSales = async (key)=>{
 
 
 
-const abastecer = async (abastece,value)=>{
+const abastecr = async (abastece,value)=>{
+
+
   switch (abastece){
    case prod_one:  
      
@@ -468,58 +606,106 @@ const pgtoCartao=(pgCt,value)=>{
 
 
 
+
+
+   
+
+
+
+
+
+       
+var prodtosNome = [];
+var prodtosPreco = [];
+var prodtosAbas = [];
+var prodtosNot = [];
+var prodtosDnQt = [];
+var prodtosDnVa = [];
+var prodtosCtQt = [];
+var prodtosCtVa = [];
+var prodtosTotal = [];
+
+
+prodtosNome.push('Banoffee');
+prodtosNome.push('Banoffee');
+prodtosNome.push('Banoffee');
+prodtosNome.push('Banoffee');
+prodtosNome.push('Banoffee');
+
+
+
+for (let i = 0; i < prodtosNome.length; i++) {
+
+         prodtosNome[i];
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
 const html = `
 <html>
-
-  <head>
-
+ <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-
-   <style>
-
-    #div{
-      width:1000px;
-      height:600px;
-      background-color: rgba(27, 59, 78,1);
-      background-image: linear-gradient(to bottom, transparent, rgba(27, 59, 78,0.5)); 
-      padding:20px;
-      margin-left:50px;
-      margin-top:80px
-     } 
-     
-    table{
-      height:auto;
-     width:98%;	        
-       padding: 5px;   
-       border-collapse: separate; 
-       border-spacing: 2px; 
-       background-color: rgba(0, 0, 0, 0.3); 
-       margin:10px;   
-     } 
-     
-    th{
-     font-size: 1.6em;
-     text-transform: capitalize;
-     color:rgba(221,240,210, 0.9);
-     background-color:black;  
-   }
-   
-   tr, td{
-       border: 2px solid black; 
-     text-align: center;
-     font-family: 'Open Sans', sans-serif;  
-       font-weight: bold;
-       font-size: 1.1em;
-       line-height: 1.66667em;
-       color:rgba(256,234,211, 0.8);
-     text-transform: capitalize;
-     padding:2px;
-     }
+  
+  <style>
+		#div {
+			width: 1000px;
+			height: 600px;
+			background-color: rgba(27, 59, 78, 1);
+			background-image: linear-gradient(to bottom, transparent, rgba(27, 59, 78, 0.5));
+			padding: 20px;
+			margin-left: 50px;
+			margin-top: 80px
+		}
+		table {
+			height: auto;
+			width: 98%;
+			padding: 5px;
+			border-collapse: separate;
+			border-spacing: 2px;
+			background-color: rgba(0, 0, 0, 0.3);
+			margin: 10px;
+		}
+		th {
+			font-size: 1.6em;
+			text-transform: capitalize;
+			color: rgba(221, 240, 210, 0.9);
+			background-color: black;
+		}
+		tr,
+		td {
+			border: 2px solid black;
+			text-align: center;
+			font-family: 'Open Sans', sans-serif;
+			font-weight: bold;
+			font-size: 1.1em;
+			line-height: 1.66667em;
+			color: rgba(256, 234, 211, 0.8);
+			text-transform: capitalize;
+			padding: 2px;
+		}
+	</style>
+ </head>
     
-   </style>
-
-  </head>
-
   <body style="text-align: center;">
 
     <h1 style="font-size: 50px; font-family: Helvetica Neue; font-weight: normal;">
@@ -529,222 +715,131 @@ const html = `
     <img
       src="https://d30j33t1r58ioz.cloudfront.net/static/guides/sdk.png"
       style="width: 90vw;" />
+  
+   
+
+    <div id="div">
+      <table>  
+        <colgroup>
+          <col />
+          <col />
+          <col />
+          <col />
+          <col style="background-color: rgba(17, 19, 88,1);" />
+          <col />
+          <col />
+          <col style="background-color: rgba(17, 19, 88,1);" />
+          <col />
+          <col />
+          <col />
+          <col style="background-color: rgba(147, 09, 18,1);" />
+          <col />
+          <col />
+          <col style="background-color: rgba(147, 09, 18,1);" />
+          <col />
+          <col />
+          <col />
+          <col style="background-color: rgba(47, 109, 118,1);" />
+        </colgroup>  
+        <thead>
+          <tr>
+            <th colspan="20">Relatório de Vendas</th>
+          </tr>
+          <tr>
+            <th id="showDate" colspan="20"></th>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="3">Produto</td>
+            <td colspan="1" rowspan="3">Preço</td>
+            <td colspan="1" rowspan="3">Abastecimento</td>
+            <td colspan="1" rowspan="3">não vendidos</td>
+            <td colspan="14" style="background-color: rgba(27, 59, 78,1);">Vendidos</td>
+            <td colspan="1" rowspan="3">Total</td>
+          </tr>
+          <tr>
+            <td colspan="7">Dinheiro</td>
+            <td colspan="7">Cartão</td>
+          </tr>
+          <tr>
+            <td colspan="3">qtd</td>
+            <td colspan="4">valor</td>
+            <td colspan="3">qtd</td>
+            <td colspan="4">valor</td>
+          </tr>
+        </thead>  
+        <tbody id="tbody" style="color:white">
+            
+
+        <tr>
+	         <td>${prod_one}</td>
+	         <td>${produtoOne.preco}</td>
+	         <td>${produtoOne.abastecimento}</td>
+	         <td>01</td>
+	   
+	         <td colspan="3">${produtoOne.qtdDn}</td>	   
+	         <td colspan="4">${produtoOne.pgtoDn}</td>
+	   
+	         <td colspan="3">${produtoOne.qtdCt}</td>	   
+	         <td colspan="4">${produtoOne.pgtoCt}</td>
+	 
+	         <td>${produtoOne.totalAll}</td>
+        </tr>
+          
+
+        <tr>
+          <td>
+            ${prodtosNome}
+           </td>
+        </tr>
+
+        <tr>
+         <td>
+          ${prodtosNome}
+         </td>
+       </tr>
+
+      <tr>
+        <td>
+         ${prodtosNome}
+        </td>
+    </tr>
+
+
+
+
+
+
+        
+        </tbody>  
+        <tfoot></tfoot>  
+      </table>  
+    </div>   
+ 
+
 
   
-      <div id="div" >
+   
 
-      <table> 
-         
-         <colgroup>
-          
-          <col />
-          <col />
-          <col /> 
-          <col /> 
-      
-          
-          <col style="background-color: rgba(17, 19, 88,1);" />
-          
-          <col/> 
-          
-          <col/> 
-          
-              <col style="background-color: rgba(17, 19, 88,1);"/> 		
-          
-          <col/>		
-          <col/>		
-          <col/>
-          
-          <col style="background-color: rgba(147, 09, 18,1);"/>
-          
-          <col/>
-          <col/>
-          
-          <col style="background-color: rgba(147, 09, 18,1);"/>
-              
-          <col/>
-          <col/>
-          <col/>
-          
-          
-              <col style="background-color: rgba(47, 109, 118,1);" />
-          
-         </colgroup>
-         
-        <thead>
-              
-          <tr>
-          <th  colspan="20">Relatório de Vendas</th>
-        </tr>
-        
-          <tr>
-          <th  colspan="20">26/05/2022</th>
-        </tr>
-          
-        <tr>
-          <td colspan="1" rowspan="3">Produto</td>
-          <td colspan="1" rowspan="3">Preço</td>
-          <td colspan="1" rowspan="3">Abastecimento</td>
-          <td colspan="1" rowspan="3">não vendidos</td>
-          <td colspan="14" style="background-color: rgba(27, 59, 78,1);">Vendidos</td> 
-          <td colspan="1" rowspan="3">Total</td>
-        </tr>
-        
-        <tr>
-          <td colspan="7" >Dinheiro</td>
-          <td colspan="7" >Cartão</td>
-                
-        </tr>
-        
-        <tr>
-          <td colspan="3">qtd</td>
-          <td colspan="4">valor</td>
-          <td colspan="3">qtd</td>
-          <td colspan="4">valor</td>
-         
-        </tr>
-        
-        
-        </thead>
-        
-        <tbody>
-        
-           <tr>
-           <td>${prod_one}</td>
-           <td>R$ ${produtoOne.preco}</td>
-           <td>${produtoOne.count}</td>
-           <td>01</td>
-           
-           <td colspan="3">05</td>	   
-           <td colspan="4">R$ 60,00</td>
-           
-           <td colspan="3">04</td>	   
-           <td colspan="4">R$ 48,00</td>
-         
-           <td>R$ 108,00</td>
-           </tr>
-         
-         
-          <tr>
-           <td>Banoffee</td>
-           <td>R$ 12,00</td>
-           <td>10</td>
-           <td>01</td>
-           
-           <td colspan="3">05</td>	   
-           <td colspan="4">R$ 60,00</td>
-           
-           <td colspan="3">04</td>	   
-           <td colspan="4">R$ 48,00</td>
-         
-           <td>R$ 108,00</td>
-           </tr>
-         
-         
-          <tr>
-           <td>Banoffee</td>
-           <td>R$ 12,00</td>
-           <td>10</td>
-           <td>01</td>
-           
-           <td colspan="3">05</td>	   
-           <td colspan="4">R$ 60,00</td>
-           
-           <td colspan="3">04</td>	   
-           <td colspan="4">R$ 48,00</td>
-         
-           <td>R$ 108,00</td>
-           </tr>
-         
-          <tr>
-           <td>Banoffee</td>
-           <td>R$ 12,00</td>
-           <td>10</td>
-           <td>01</td>
-           
-           <td colspan="3">05</td>	   
-           <td colspan="4">R$ 60,00</td>
-           
-           <td colspan="3">04</td>	   
-           <td colspan="4">R$ 48,00</td>
-         
-           <td>R$ 108,00</td>
-           </tr>
-         
-          <tr>
-           <td>Banoffee</td>
-           <td>R$ 12,00</td>
-           <td>10</td>
-           <td>01</td>
-           
-           <td colspan="3">05</td>	   
-           <td colspan="4">R$ 60,00</td>
-           
-           <td colspan="3">04</td>	   
-           <td colspan="4">R$ 48,00</td>
-         
-           <td>R$ 108,00</td>
-           </tr>
-         
-          <tr>
-           <td>Banoffee</td>
-           <td>R$ 12,00</td>
-           <td>10</td>
-           <td>01</td>
-           
-           <td colspan="3">05</td>	   
-           <td colspan="4">R$ 60,00</td>
-           
-           <td colspan="3">04</td>	   
-           <td colspan="4">R$ 48,00</td>
-         
-           <td>R$ 108,00</td>
-           </tr>
-         
-          <tr>
-           <td>Banoffee</td>
-           <td>R$ 12,00</td>
-           <td>10</td>
-           <td>01</td>
-           
-           <td colspan="3">05</td>	   
-           <td colspan="4">R$ 60,00</td>
-           
-           <td colspan="3">04</td>	   
-           <td colspan="4">R$ 48,00</td>
-         
-           <td>R$ 108,00</td>
-           </tr>                
-         
-        </tbody>
-        
-        <tfoot>
-           <tr>
-           <td colspan="2">Totais</td>
-           <td>70</td>
-           <td>07</td>
-           
-           <td colspan="3">35</td>	   
-           <td colspan="4">R$ 420,00</td>
-           
-           <td colspan="3">28</td>	   
-           <td colspan="4">R$ 336,00</td>
-         
-           <td>R$ 756,00</td>
-         </tr>
-        </tfoot>       
-      
-      </table>
-      
-      </div>
+
+
 
   </body>
 </html>
 `;
 
 
+
+
+
+
+
+
+
+
+
 const printToFile = async () => {
   // On iOS/android prints the given html. On web prints the HTML from the current page.
+
   const { uri } = await Print.printToFileAsync({
     html
   });
@@ -767,10 +862,7 @@ const printToFile = async () => {
 
 return(
 
-<SafeAreaView  style={Estilos.containnerBody}>
-
-
-  
+<SafeAreaView  style={Estilos.containnerBody}> 
 
 
 
@@ -780,9 +872,8 @@ return(
 
 <LinearGradient 
 
-colors={['#4c669f', '#3b5998', '#192f6a']}
- 
- style={Estilos.gradienteHeader}
+colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']} 
+ style={{flex:1}}
  
  >
  <View style={Estilos.viewHeader}> 
@@ -802,11 +893,24 @@ colors={['#4c669f', '#3b5998', '#192f6a']}
 
 
 
+<LinearGradient
+
+colors={['rgba(111, 0, 0, 1)', 'rgba(140, 51, 51,0.8)','rgba(115, 0, 0, 0.7)']} 
+ style={{flex:1}}
+
+>
 
 <View style={Estilos.containnerMain}>
+
+
+
 {/* produto_one */}
+
 <View style={Estilos.containnerProduto}>
+
+
   <View style={Estilos.viewProduto}>
+
     <View style={Estilos.viewProdName}>
     <Image 
        source={require('../assets/banoffee.jpg')}
@@ -881,6 +985,12 @@ colors={['#4c669f', '#3b5998', '#192f6a']}
   </View>
 
 </View>
+
+
+
+
+
+
 
 {/* produto_two */}
 <View style={Estilos.containnerProduto}>
@@ -1105,6 +1215,7 @@ colors={['#4c669f', '#3b5998', '#192f6a']}
 
 {/* acrecentar daqui para cima */}
 
+ 
  <View style={Estilos.viewAmount}>
 
   <Text style={Estilos.textInfo}>{`Valor total Dinheiro R$ ${produtoOne.pgtoDn + produtoTwo.pgtoDn + produtoThree.pgtoDn} ,00 `}</Text>
@@ -1119,21 +1230,64 @@ colors={['#4c669f', '#3b5998', '#192f6a']}
        {/* Testando storage */}
 
 
-  <TouchableOpacity onPress={(value)=>storage("1","10") & fillStorage("1") }   
+  <TouchableOpacity onPress={(value)=>setAbastecer(prod_one, produtoOne.abastecimento) & getAbastecer(prod_one) }   
     style={Estilos.touchAbleS}>
-    <Text style={Estilos.touchText}>fill</Text>
+    <Text style={Estilos.touchText}>Abastecer</Text>
   </TouchableOpacity>
 
 
-  <Text style={Estilos.textInfo}>{`qtd ${produtoTwo.count} `}</Text>
 
-  <TouchableOpacity onPress={(value)=>clearStorage()}   
+  <TouchableOpacity onPress={(value)=>setAdd(prod_one, "1") & getAdd(prod_one) }   
+    style={Estilos.touchAbleS}>
+    <Text style={Estilos.touchText}>+ 1</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity onPress={(value)=>setRemove(prod_one, "1") & getRemove(prod_one) }   
+    style={Estilos.touchAbleS}>
+    <Text style={Estilos.touchText}>- 1</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity onPress={(value)=>setZerar(prod_one, "0") & getZerar(prod_one) }   
+    style={Estilos.touchAbleS}>
+    <Text style={Estilos.touchText}>zerar</Text>
+  </TouchableOpacity>
+
+
+  <TouchableOpacity onPress={(value)=>setPgtoDn(prod_one, "1") & getPgtoDn(prod_one) }   
+    style={Estilos.touchAbleS}>
+    <Text style={Estilos.touchText}>Dn</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity onPress={(value)=>setPgtoCt(prod_one, "1") & getPgtoCt(prod_one) }   
+    style={Estilos.touchAbleS}>
+    <Text style={Estilos.touchText}>Ct</Text>
+  </TouchableOpacity>
+
+
+
+
+
+
+
+ {/*  <TouchableOpacity onPress={(value)=>storage("1","10") & fillStorage("1") }   
+    style={Estilos.touchAbleS}>
+    <Text style={Estilos.touchText}>fill</Text>
+  </TouchableOpacity>
+ */}
+
+
+
+
+  <Text style={Estilos.textInfo}>{`qtd ${produtoOne.count} `}</Text>
+
+  <Text style={Estilos.textInfo}>{`Valor em dinheiro R$ ${produtoOne .pgtoDn},00  ${produtoOne.qtdDn}  vendas`}</  Text>
+  <Text style={Estilos.textInfo}>{`Valor em cartão R$ ${produtoOne.pgtoCt},00  ${produtoOne.qtdCt}  vendas`}</Text>
+
+
+  {/* <TouchableOpacity onPress={(value)=>clearStorage()}   
     style={Estilos.touchAbleS}>
     <Text style={Estilos.touchText}>clear</Text>
   </TouchableOpacity> 
-
-
-
  
   <TouchableOpacity onPress={(value)=>setDn('2','85' ) & calcDn('2') }   
     style={Estilos.touchAbleS}>
@@ -1142,12 +1296,10 @@ colors={['#4c669f', '#3b5998', '#192f6a']}
   
   <Text style={Estilos.textInfo}>{`soma ${produtoOne.preco} `}</Text>
 
-
   <TouchableOpacity onPress={(clearDn)}   
     style={Estilos.touchAbleS}>
     <Text style={Estilos.touchText}>clear</Text>
   </TouchableOpacity>
-
 
   <TouchableOpacity onPress={(value)=>storage('1','1' ) & addStorage('1') }   
     style={Estilos.touchAbleS}>
@@ -1159,19 +1311,22 @@ colors={['#4c669f', '#3b5998', '#192f6a']}
     <Text style={Estilos.touchText}>-</Text>
   </TouchableOpacity>
 
-
-  {/*
+ 
   <Text style={Estilos.textInfo}>{`kye_1 ${produtoOne.count} `}</Text>
-
 
   <TouchableOpacity onPress={clearSales}   
     style={Estilos.touchAbleS}>
     <Text style={Estilos.touchText}>limpar</Text>
-  </TouchableOpacity>  */}
+  </TouchableOpacity>  */} 
+
+
+
+
 
 
   </View>
-    
+
+ 
 
    
 
@@ -1180,7 +1335,7 @@ colors={['#4c669f', '#3b5998', '#192f6a']}
   </View> */}
 
   
-  <TouchableOpacity onPress={printToFile}   
+  <TouchableOpacity onPress={printToFile}  
     style={Estilos.touchAbleR}>
 
     <Text style={Estilos.touchText}>Gerar Relatório</Text>
@@ -1190,6 +1345,7 @@ colors={['#4c669f', '#3b5998', '#192f6a']}
  </View>
 
 
+ </LinearGradient>
 
  
 

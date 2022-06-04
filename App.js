@@ -8,9 +8,9 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import Sales from './src/vendas';
 
-//import Storage from './src/estoque';
+import Storage from './src/estoque';
 
-import Relatorio from './src/relatorioVendas';
+
 
 
 
@@ -38,8 +38,8 @@ initialRouteName='Sales'
 
 
 
-   tabBarActiveBackgroundColor:'rgba(205, 205, 103, 0.8)',   
-   tabBarInactiveBackgroundColor:'rgba(205, 205, 103, 0.5)',
+   tabBarActiveBackgroundColor:'rgba(251, 195, 95, 1.0)',   
+   tabBarInactiveBackgroundColor:'rgba(251, 195, 95, 0.5)',
 
 
    tabBarActiveTintColor:'rgba(125, 105, 53, 0.8)',
@@ -84,7 +84,7 @@ initialRouteName='Sales'
 
   >    
     <Tab.Screen name='Sales'     component={Sales}/>
-    <Tab.Screen name='Relatorio' component={Relatorio}/>
+    <Tab.Screen name='Relatorio' component={Storage}/>
     
 
    </Tab.Navigator>
