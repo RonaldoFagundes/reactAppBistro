@@ -11,7 +11,14 @@ import AsyncStorageSales from '@react-native-async-storage/async-storage';
 
 export default function Vendas(){
 
+
+
 const data = new Date().toLocaleString(); 
+
+const [selectedPrinter, setSelectedPrinter] = React.useState();
+
+
+
 
 const prod_one = 'banoffee';
 const prod_two = 'puddim';
@@ -59,9 +66,95 @@ const[produtoThree, setProdutoThree] = useState({
   totalAll:0
 });
 
+const[produtoFour, setProdutoFour] = useState({
+  count:0, 
+  preco:15,
+  pgtoDn:0,
+  qtdDn:0,
+  totalDn:0,
+  pgtoCt:0,
+  qtdCt:0,
+  totalCt:0,
+  totalAll:0
+});
+
+const[produtoFive, setProdutoFive] = useState({
+  count:0, 
+  preco:15,
+  pgtoDn:0,
+  qtdDn:0,
+  totalDn:0,
+  pgtoCt:0,
+  qtdCt:0,
+  totalCt:0,
+  totalAll:0
+});
+
+const[produtoSix, setProdutoSix] = useState({
+  count:0, 
+  preco:15,
+  pgtoDn:0,
+  qtdDn:0,
+  totalDn:0,
+  pgtoCt:0,
+  qtdCt:0,
+  totalCt:0,
+  totalAll:0
+});
+
+const[produtoSeven, setProdutoSeven] = useState({
+  count:0, 
+  preco:15,
+  pgtoDn:0,
+  qtdDn:0,
+  totalDn:0,
+  pgtoCt:0,
+  qtdCt:0,
+  totalCt:0,
+  totalAll:0
+});
+
+const[produtoEight, setProdutoEight] = useState({
+  count:0, 
+  preco:15,
+  pgtoDn:0,
+  qtdDn:0,
+  totalDn:0,
+  pgtoCt:0,
+  qtdCt:0,
+  totalCt:0,
+  totalAll:0
+});
+
+const[produtoNine, setProdutoNine] = useState({
+  count:0, 
+  preco:15,
+  pgtoDn:0,
+  qtdDn:0,
+  totalDn:0,
+  pgtoCt:0,
+  qtdCt:0,
+  totalCt:0,
+  totalAll:0
+});
+
+
+const[produtoTen, setProdutoTen] = useState({
+  count:0, 
+  preco:15,
+  pgtoDn:0,
+  qtdDn:0,
+  totalDn:0,
+  pgtoCt:0,
+  qtdCt:0,
+  totalCt:0,
+  totalAll:0
+});
+
 
     // metodos asynStorage
-const setAbastecer =  (key,value)=>{
+
+ const setAbastecer =  (key,value)=>{
   AsyncStorageSales.setItem(key,value);
 }
 
@@ -185,19 +278,13 @@ const getPgtoCt = async(key)=>{
 
 }
 
-
-
-
-
-
-
-   const clearStorage =()=>{
+  const clearStorage =()=>{
     AsyncStorageSales.clear(); 
 
     setProdutoOne({
       ...produtoOne, count :(0)
     })
-  }
+  }  
 
 
 
@@ -312,9 +399,8 @@ const surchSales = async (key)=>{
 
     
    setSales({
-    ...sales,count:(jsonValue) ,                
+    ...sales,count:(jsonValue) ,         
    })
-
 
 }
 */
@@ -326,7 +412,6 @@ const surchSales = async (key)=>{
 
 const abastecr = async (abastece,value)=>{
 
-
   switch (abastece){
    case prod_one:  
      
@@ -337,8 +422,7 @@ const abastecr = async (abastece,value)=>{
          produtoOne,pgtoCt:(produtoOne.pgtoCt =0),
          produtoOne,qtdCt:(produtoOne.qtdCt =0),
          produtoOne,totalAll:(produtoOne.totalAll =0)           
-      })   
-   
+      })    
 
    break;
    case prod_two:    
@@ -362,7 +446,6 @@ const abastecr = async (abastece,value)=>{
   }) 
   break;
 }
-
      /*
        if(abastece== prod_one ){
        setProdutoOne({
@@ -385,6 +468,9 @@ const abastecr = async (abastece,value)=>{
       }
        */
     }
+
+
+
 
 const addOne=(addone,value)=>{
    switch (addone) {
@@ -612,321 +698,237 @@ const pgtoCartao=(pgCt,value)=>{
 
 
 
-
-
-// enviando info para o table teste_1//
-var vendas = new Array();   
-    
-var absOne = 0;
-
-   if (absOne>0){
-
-for( var i=0; i < 1; i++) {
-
-   vendas.push("Banoffee")  
-   vendas.push(12)
-   vendas.push(10)
-   vendas.push(1)   
-   vendas.push(3)
-   vendas.push(36)  
-   vendas.push(4)
-   vendas.push(48)
-   vendas.push(84)   
-}
-
-
-for( var i=0; i < 1; i++) {
-
-  vendas.push("Pudim")  
-  vendas.push(15)
-  vendas.push(10)
-  vendas.push(2)   
-  vendas.push(5)
-  vendas.push(75)  
-  vendas.push(3)
-  vendas.push(45)
-  vendas.push(120)  
-
- }
-
- }else{
-
-
- for( var i=0; i < 1; i++) {
-
-  vendas.push("Pudim")  
-  vendas.push(15)
-  vendas.push(10)
-  vendas.push(2)   
-  vendas.push(5)
-  vendas.push(75)  
-  vendas.push(3)
-  vendas.push(45)
-  vendas.push(120)  
-
- }
-
- }
-
-
-
-
-
-
-
-
-  // enviando info para o table teste_2 //     
-var prodtosNome = [];
-
-var prodtosPreco = [];
-var prodtosAbas = [];
-var prodtosNot = [];
-var prodtosDnQt = [];
-var prodtosDnVa = [];
-var prodtosCtQt = [];
-var prodtosCtVa = [];
-var prodtosTotal = [];
-
-
-var prodOneAb = 0;
-
-    if (prodOneAb>0){
-prodtosNome.push('Banoffee');
-    }
-   else{
-prodtosNome.push('pudim');
-prodtosNome.push('pote');
-prodtosNome.push('geleia');
-prodtosNome.push('torta');
-   }
-
-for (let i = 0; i < prodtosNome.length; i++) {
-
-         prodtosNome[i];
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
-
-
-
-
-const html = `
-<html>
- <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-  
-   
-  <style>
-		#div {
-			width: 1000px;
-			height: 600px;
-			background-color: rgba(27, 59, 78, 1);
-			background-image: linear-gradient(to bottom, transparent, rgba(27, 59, 78, 0.5));
-			padding: 20px;
-			margin-left: 50px;
-			margin-top: 80px
-		}
-		table {
-			height: auto;
-			width: 98%;
-			padding: 5px;
-			border-collapse: separate;
-			border-spacing: 2px;
-			background-color: rgba(0, 0, 0, 0.3);
-			margin: 10px;
-		}
-		th {
-			font-size: 1.6em;
-			text-transform: capitalize;
-			color: rgba(221, 240, 210, 0.9);
-			background-color: black;
-		}
-		tr,
-		td {
-			border: 2px solid black;
-			text-align: center;
-			font-family: 'Open Sans', sans-serif;
-			font-weight: bold;
-			font-size: 1.1em;
-			line-height: 1.66667em;
-			color: rgba(256, 234, 211, 0.8);
-			text-transform: capitalize;
-			padding: 2px;
-		}
-	</style>
-
-
- </head>
-
-    
-  <body style="text-align: center;">
-
-    <h1 style="font-size: 50px; font-family: Helvetica Neue; font-weight: normal;">
-       Bistrô Di Totta
-    </h1>
-
-    <img
-      src="https://d30j33t1r58ioz.cloudfront.net/static/guides/sdk.png"
-      style="width: 90vw;" />
-  
-   
-
-    <div id="div">
-      <table>  
-        <colgroup>
-          <col />
-          <col />
-          <col />
-          <col />
-          <col style="background-color: rgba(17, 19, 88,1);" />
-          <col />
-          <col />
-          <col style="background-color: rgba(17, 19, 88,1);" />
-          <col />
-          <col />
-          <col />
-          <col style="background-color: rgba(147, 09, 18,1);" />
-          <col />
-          <col />
-          <col style="background-color: rgba(147, 09, 18,1);" />
-          <col />
-          <col />
-          <col />
-          <col style="background-color: rgba(47, 109, 118,1);" />
-        </colgroup>  
-        <thead>
-          <tr>
-            <th colspan="20">Relatório de Vendas</th>
-          </tr>
-          <tr>
-            <th id="showDate" colspan="20"></th>
-          </tr>
-          <tr>
-            <td colspan="1" rowspan="3">Produto</td>
-            <td colspan="1" rowspan="3">Preço</td>
-            <td colspan="1" rowspan="3">Abastecimento</td>
-            <td colspan="1" rowspan="3">não vendidos</td>
-            <td colspan="14" style="background-color: rgba(27, 59, 78,1);">Vendidos</td>
-            <td colspan="1" rowspan="3">Total</td>
-          </tr>
-          <tr>
-            <td colspan="7">Dinheiro</td>
-            <td colspan="7">Cartão</td>
-          </tr>
-          <tr>
-            <td colspan="3">qtd</td>
-            <td colspan="4">valor</td>
-            <td colspan="3">qtd</td>
-            <td colspan="4">valor</td>
-          </tr>
-        </thead>  
-        <tbody id="tbody" style="color:white">
-            
-
-        <tr>
-	         <td>${vendas[0]}</td>
-           	         
-           <td>${vendas[1]}</td>	         
-    
-           <td>${vendas[2]}</td>	         
- 
-           <td>${vendas[3]}</td>	         
-
-           <td colspan="3">${vendas[4]}</td>	 
-
-           <td colspan="4">${vendas[5]}</td>	 
-
-           <td  colspan="3">${vendas[6]}</td>	 
-
-           <td  colspan="4">${vendas[7]}</td>	 
-
-           <td>${vendas[8]}</td>
-        </tr>
-
-
-
-       <tr>
-        <td>${vendas[9]}</td>
-                   
-        <td>${vendas[10]}</td>	         
- 
-        <td>${vendas[11]}</td>	         
-
-        <td>${vendas[12]}</td>	         
-
-        <td colspan="3">${vendas[13]}</td>	 
-
-        <td colspan="4">${vendas[14]}</td>	 
-
-        <td  colspan="3">${vendas[15]}</td>	 
-
-        <td  colspan="4">${vendas[16]}</td>	 
-
-        <td>${vendas[17]}</td>
-     </tr>
-          
-        </tbody>  
-        <tfoot></tfoot>  
-      </table>  
-    </div>   
- 
-
-
-
-   
-
-       
-       
-
-     
-
-    
-
-        
-         
-   
-    
-
-
-  </body>
-</html>
-`;
-
-
-
-
-
-
-
-
-
+const print = async () => {
+  // On iOS/android prints the given html. On web prints the HTML from the current page.
+  await Print.printAsync({
+    html:createDynamicTable() ,
+    printerUrl: selectedPrinter?.url, // iOS only
+  });
+} 
 
 
 const printToFile = async () => {
   // On iOS/android prints the given html. On web prints the HTML from the current page.
-
   const { uri } = await Print.printToFileAsync({
-    html
+    html:createDynamicTable(),
   });
 
   console.log('File has been saved to:', uri);
   await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
 }
+
+const array = [];
+
+const produto_one_aba = 10;
+const produto_two_aba = 10;
+
+
+
+   if (produto_one_aba > 0){
+  array.push({
+   produt:"Banoffee",
+   price:15,
+   abs:10,
+   notsell:2,
+   dnqtd:3,
+   dnvalor:45,
+    ctqtd:5,
+    ctvalor:75,
+    total: 120
+   }); 
+  } 
+          
+  
+  
+  if (produto_two_aba > 0){
+array.push({
+  produt:"Pudim",
+  price:12,
+  abs:8,
+  notsell:1,
+  dnqtd:2,
+  dnvalor:24,
+  ctqtd:5,
+  ctvalor:60,
+  total:84
+}); 
+ }
+
+
+ 
+ const createDynamicTable =()=>{
+
+  var table ="";
+
+  for (let i in array ){
+
+    const item = array[i];
+    table = table + `
+    
+      <tr>
+         <td>${item.produt}</td>
+         <td>${item.price}</td>
+         <td>${item.abs}</td>         
+         <td>${item.notsell}</td> 
+         <td colspan="3">${item.dnqtd}</td> 
+         <td colspan="4">${item.dnvalor}</td> 
+         <td colspan="3">${item.ctqtd}</td> 
+         <td colspan="4">${item.ctvalor}</td> 
+         <td>${item.total}</td> 
+      </tr>
+
+
+    `
+  } 
+  // console.log(table); 
+
+   const html = `
+   <!DOCTYPE html>
+   <html>
+    <head>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+     
+      
+     <style>
+       #div {
+         width: 1000px;
+         height: 600px;
+         background-color: rgba(27, 59, 78, 1);
+         background-image: linear-gradient(to bottom, transparent, rgba(27, 59, 78, 0.5));
+         padding: 20px;
+         margin-left: 50px;
+         margin-top: 80px
+       }
+       table {
+         height: auto;
+         width: 98%;
+         padding: 5px;
+         border-collapse: separate;
+         border-spacing: 2px;
+         background-color: rgba(0, 0, 0, 0.3);
+         margin: 10px;
+       }
+       th {
+         font-size: 1.6em;
+         text-transform: capitalize;
+         color: rgba(221, 240, 210, 0.9);
+         background-color: black;
+       }
+       tr,
+       td {
+         border: 2px solid black;
+         text-align: center;
+         font-family: 'Open Sans', sans-serif;
+         font-weight: bold;
+         font-size: 1.1em;
+         line-height: 1.66667em;
+         color: rgba(256, 234, 211, 0.8);
+         text-transform: capitalize;
+         padding: 2px;
+       }
+     </style>
+   
+   
+    </head>    
+     <body style="text-align: center;">
+   
+
+       <h1 style="font-size: 50px; font-family: Helvetica Neue; font-weight: normal;">
+          Bistrô Di Totta
+       </h1>
+   
+       <img
+         src="https://d30j33t1r58ioz.cloudfront.net/static/guides/sdk.png"
+         style="width: 90vw;" />  
+   
+       <div id="div">
+         <table>  
+           <colgroup>
+             <col />
+             <col />
+             <col />
+             <col />
+             <col style="background-color: rgba(17, 19, 88,1);" />
+             <col />
+             <col />
+             <col style="background-color: rgba(17, 19, 88,1);" />
+             <col />
+             <col />
+             <col />
+             <col style="background-color: rgba(147, 09, 18,1);" />
+             <col />
+             <col />
+             <col style="background-color: rgba(147, 09, 18,1);" />
+             <col />
+             <col />
+             <col />
+             <col style="background-color: rgba(47, 109, 118,1);" />
+           </colgroup>  
+           <thead>
+             <tr>
+               <th colspan="20">Relatório de Vendas</th>
+             </tr>
+             <tr>
+               <th id="showDate" colspan="20"></th>
+             </tr>
+
+             <tr>
+               <td colspan="1" rowspan="3">Produto</td>
+               <td colspan="1" rowspan="3">Preço</td>
+               <td colspan="1" rowspan="3">Abastecimento</td>
+               <td colspan="1" rowspan="3">não vendidos</td>
+               <td colspan="14" style="background-color: rgba(27, 59, 78,1);">Vendidos</td>
+               <td colspan="1" rowspan="3">Total</td>
+             </tr>
+
+             <tr>
+               <td colspan="7">Dinheiro</td>
+               <td colspan="7">Cartão</td>
+             </tr>
+
+             <tr>
+               <td colspan="3">qtd</td>
+               <td colspan="4">valor</td>
+               <td colspan="3">qtd</td>
+               <td colspan="4">valor</td>
+             </tr>
+             
+           </thead>  
+
+           <tbody id="tbody" style="color:white">
+          
+            <tr>
+            ${table}
+            </tr>
+             
+           </tbody>  
+
+           <tfoot></tfoot>  
+         </table>  
+       </div>  
+     </body>
+   </html>
+   `;
+
+   return html;
+
+
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
 
 
 
@@ -1419,6 +1421,13 @@ colors={['rgba(111, 0, 0, 1)', 'rgba(140, 51, 51,0.8)','rgba(115, 0, 0, 0.7)']}
     style={Estilos.touchAbleR}>
 
     <Text style={Estilos.touchText}>Gerar Relatório</Text>
+  </TouchableOpacity>
+
+
+  <TouchableOpacity onPress={print}  
+    style={Estilos.touchAbleR}>
+
+    <Text style={Estilos.touchText}>Ptint</Text>
   </TouchableOpacity>
 
 
