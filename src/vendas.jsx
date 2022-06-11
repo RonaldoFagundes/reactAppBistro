@@ -13,7 +13,17 @@ export default function Vendas(){
 
 
 
-const data = new Date().toLocaleString(); 
+
+ 
+
+
+var data = new Date();
+var dia  = data.getDate().toString().padStart(2, '0');
+var mes  = (data.getMonth()+1).toString().padStart(2, '0') ;
+var ano  = data.getFullYear();
+var today = dia+"/"+mes+"/"+ano;
+
+
 
 const [selectedPrinter, setSelectedPrinter] = React.useState();
 
@@ -21,14 +31,14 @@ const [selectedPrinter, setSelectedPrinter] = React.useState();
 
 
 const prod_one = 'banoffee';
-const prod_two = 'puddim';
-const prod_three ='mousse';
-const prod_four ='pote';
-const prod_five ='mousse';
-const prod_six ='mousse';
-const prod_seven ='mousse';
-const prod_eight ='mousse';
-const prod_nine ='mousse';
+const prod_two = 'bombom';
+const prod_three ='brigadeirao';
+const prod_four ='morango';
+const prod_five ='abacaxi';
+const prod_six ='abacaxi';
+const prod_seven ='limao';
+const prod_eight ='ninho';
+const prod_nine ='pudim';
 const prod_ten ='mousse';
 
 
@@ -218,7 +228,18 @@ const getAbastecer = async(key)=>{
                 produtoFour,pgtoCt:(produtoFour.pgtoCt =0),
                 produtoFour,qtdCt:(produtoFour.qtdCt =0),
                 produtoFour,totalAll:(produtoFour.totalAll =0)           
-             })     
+             })  
+             break;
+             case prod_five: 
+              setProdutoFive({
+              ...produtoFive, count :(quantidade),
+                produtoFive,pgtoDn:(produtoFive.pgtoDn = 0) ,
+                produtoFive,qtdDn:(produtoFive.qtdDn = 0),
+                produtoFive,pgtoCt:(produtoFive.pgtoCt =0),
+                produtoFive,qtdCt:(produtoFive.qtdCt =0),
+                produtoFive,totalAll:(produtoFive.totalAll =0)           
+             })  
+             break;   
            }
          }
 
@@ -251,6 +272,12 @@ const getAbastecer = async(key)=>{
       setProdutoFour({
        ...produtoFour,count:(produtoFour.count +valor)
      }) 
+     break;
+      case prod_five:       
+      setProdutoFive({
+       ...produtoFive,count:(produtoFive.count +valor)
+     }) 
+     break;
     }   
   }
 
@@ -282,6 +309,11 @@ const getAbastecer = async(key)=>{
       ...produtoFour,count:(produtoFour.count -valor)
     }) 
    :false;
+   key==prod_five && produtoFive.count>=1 ?
+   setProdutoFive({
+     ...produtoFive,count:(produtoFive.count -valor)
+   }) 
+  :false;
   }
 
 
@@ -333,6 +365,17 @@ const getAbastecer = async(key)=>{
                produtoFour,qtdCt:(produtoFour.qtdCt =valor),
                produtoFour,totalAll:(produtoFour.totalAll =valor)
           })
+          break;
+        case prod_five:
+          setProdutoFive ({
+            ...produtoFive,count:(valor),
+               produtoFive,pgtoDn:(produtoFive.pgtoDn = valor) ,
+               produtoFive,qtdDn:(produtoFive.qtdDn = valor),
+               produtoFive,pgtoCt:(produtoFive.pgtoCt =valor),
+               produtoFive,qtdCt:(produtoFive.qtdCt =valor),
+               produtoFive,totalAll:(produtoFive.totalAll =valor)
+          })
+          break;
     }
 }
   
@@ -376,6 +419,14 @@ const getPgtoDn = async(key)=>{
        produtoFour,pgtoDn:(produtoFour.pgtoDn + produtoFour.preco),
        produtoFour,qtdDn:(produtoFour.qtdDn+valor),
        produtoFour,totalAll:(produtoFour.totalAll = produtoFour.pgtoDn + produtoFour.pgtoCt +produtoFour.preco )
+   }) 
+   :false;
+   key == prod_five && produtoFive.count>=1?
+   setProdutoFive({
+    ...produtoFive,count:(produtoFive.count -valor) , 
+       produtoFive,pgtoDn:(produtoFive.pgtoDn + produtoFour.preco),
+       produtoFive,qtdDn:(produtoFive.qtdDn+valor),
+       produtoFive,totalAll:(produtoFive.totalAll = produtoFive.pgtoDn + produtoFive.pgtoCt +produtoFive.preco )
    }) 
    :false;
   }
@@ -423,8 +474,16 @@ const getPgtoCt = async(key)=>{
        produtoFour,pgtoCt:(produtoFour.pgtoCt + produtoFour.preco),
        produtoFour,qtdCt:(produtoFour.qtdCt+valor),
        produtoFour,totalAll:(produtoFour.totalAll = produtoFour.pgtoCt + produtoFour.pgtoDn +produtoFour.preco )
+      })
+   :false;
+   key == prod_five && produtoFive.count>=1?
+   setProdutoFive({
+    ...produtoFive,count:(produtoFive.count -valor) , 
+       produtoFive,pgtoCt:(produtoFive.pgtoCt + produtoFive.preco),
+       produtoFive,qtdCt:(produtoFive.qtdCt+valor),
+       produtoFive,totalAll:(produtoFive.totalAll = produtoFive.pgtoCt + produtoFive.pgtoDn +produtoFive.preco )
    })
-   :Four;
+   :false;
 }
 
 
@@ -471,42 +530,113 @@ const printToFile = async () => {
 
 
 const array = [];
-
-    
+   
 
    if (produtoOne.count > 0){
-  array.push({
-   produt:prod_one,
-   price:produtoOne.preco,
-   abs:produtoOne.abastecimento,
-   notsell:produtoOne.count,
-   dnqtd:produtoOne.qtdDn,
-   dnvalor:produtoOne.pgtoDn,
+    array.push({
+    produt:prod_one,
+    price:" R$ "+produtoOne.preco,
+    abs:produtoOne.abastecimento,
+    notsell:produtoOne.count,
+    dnqtd:produtoOne.qtdDn,
+    dnvalor:" R$ "+produtoOne.pgtoDn,
     ctqtd:produtoOne.qtdCt,
-    ctvalor:produtoOne.pgtoCt,
-    total: produtoOne.totalAll
-   }); 
+    ctvalor:" R$ "+produtoOne.pgtoCt,
+    total:" R$ "+produtoOne.totalAll
+   });     
   } 
-          
-  
   
   if (produtoTwo.count > 0){
-array.push({
-  produt:"Pudim",
-  price:12,
-  abs:8,
-  notsell:1,
-  dnqtd:2,
-  dnvalor:24,
-  ctqtd:5,
-  ctvalor:60,
-  total:84
+  array.push({
+  produt:prod_two,
+  price:" R$ "+produtoTwo.preco,
+  abs:produtoTwo.abastecimento,
+  notsell:produtoTwo.count,
+  dnqtd:produtoTwo.qtdDn,
+  dnvalor:" R$ "+produtoTwo.pgtoDn,
+  ctqtd:produtoTwo.qtdCt,
+  ctvalor:" R$ "+produtoTwo.pgtoCt,
+  total:" R$ "+produtoTwo.totalAll
+}); 
+ }
+ 
+ if (produtoThree.count > 0){
+  array.push({
+  produt:prod_three,
+  price:" R$ "+produtoThree.preco,
+  abs:produtoThree.abastecimento,
+  notsell:produtoThree.count,
+  dnqtd:produtoThree.qtdDn,
+  dnvalor:" R$ "+produtoThree.pgtoDn,
+  ctqtd:produtoThree.qtdCt,
+  ctvalor:" R$ "+produtoThree.pgtoCt,
+  total:" R$ "+produtoThree.totalAll
+}); 
+ }
+
+ if (produtoFour.count > 0){
+  array.push({
+  produt:prod_four,
+  price:" R$ "+produtoFour.preco,
+  abs:produtoFour.abastecimento,
+  notsell:produtoFour.count,
+  dnqtd:produtoFour.qtdDn,
+  dnvalor:" R$ "+produtoFour.pgtoDn,
+  ctqtd:produtoFour.qtdCt,
+  ctvalor:" R$ "+produtoFour.pgtoCt,
+  total:" R$ "+produtoFour.totalAll
+}); 
+ }
+
+ if (produtoFive.count > 0){
+  array.push({
+  produt:prod_five,
+  price:" R$ "+produtoFive.preco,
+  abs:produtoFive.abastecimento,
+  notsell:produtoFive.count,
+  dnqtd:produtoFive.qtdDn,
+  dnvalor:" R$ "+produtoFive.pgtoDn,
+  ctqtd:produtoFive.qtdCt,
+  ctvalor:" R$ "+produtoFive.pgtoCt,
+  total:" R$ "+produtoFive.totalAll
+}); 
+ }
+
+ if (produtoSix.count > 0){
+  array.push({
+  produt:prod_six,
+  price:" R$ "+produtoSix.preco,
+  abs:produtoSix.abastecimento,
+  notsell:produtoSix.count,
+  dnqtd:produtoSix.qtdDn,
+  dnvalor:" R$ "+produtoSix.pgtoDn,
+  ctqtd:produtoSix.qtdCt,
+  ctvalor:" R$ "+produtoSix.pgtoCt,
+  total:" R$ "+produtoSix.totalAll
 }); 
  }
 
 
+ var totais_vendidos_dn    = produtoOne.qtdDn + produtoTwo.qtdDn + produtoThree.qtdDn + produtoFour.qtdDn + produtoFive.qtdDn  +  produtoSix.qtdDn ;  
 
- 
+ var totais_pgto_dn    = produtoOne.pgtoDn + produtoTwo.pgtoDn + produtoThree.pgtoDn + produtoFour.pgtoDn + produtoFive.pgtoDn  +  produtoSix.pgtoDn ;  
+
+
+ var totais_vendidos_ct    = produtoOne.qtdCt + produtoTwo.qtdCt + produtoThree.qtdCt + produtoFour.qtdCt + produtoFive.qtdCt +  produtoSix.qtdCt;
+
+ var totais_pgto_ct    = produtoOne.pgtoCt + produtoTwo.pgtoCt + produtoThree.pgtoCt + produtoFour.pgtoCt + produtoFive.pgtoCt  +  produtoSix.pgtoCt ;
+
+
+
+var totais_vendidos = totais_vendidos_dn + totais_vendidos_ct ;
+
+var totais_recebidos = totais_pgto_dn + totais_pgto_ct ;
+
+
+
+
+
+
  const createDynamicTable =()=>{
 
   var table ="";
@@ -515,8 +645,8 @@ array.push({
 
     const item = array[i];
     table = table + 
-    `  
-      <tr>
+    ` 
+     <tr>
          <td>${item.produt}</td>
          <td>${item.price}</td>
          <td>${item.abs}</td>         
@@ -526,7 +656,7 @@ array.push({
          <td colspan="3">${item.ctqtd}</td> 
          <td colspan="4">${item.ctvalor}</td> 
          <td>${item.total}</td> 
-      </tr>
+      </tr>     
     `
   } 
   // console.log(table); 
@@ -584,9 +714,10 @@ array.push({
        </h1>
    
        <img
-         src="https://d30j33t1r58ioz.cloudfront.net/static/guides/sdk.png"
-         style="width: 90vw;" />  
-   
+       src="
+       https://lh3.googleusercontent.com/287A2Hjt-pUPR4nuNtJzX-rvsPTopd-LPUlzDfLoLmc2jujS_8mkWyfgPHEpjEQungA9ilb3x-FTJfsjfRNz4GGI4PyugyIx3Tqdfjw-w8k0jrXn9Gbvfu_zah7-8aabWiTZA6yW_AuZFd4f6Cjrb0njCzn3kAn3LCqO_RM4AYSJjOB7iyMN-cF_HmoCCR4CN1RMEHRSXM7SX03ZXPBeUkLp4Ywi_fyZOu7f8MoynDQC1Vap7FonjqpCe6JOOULSCwVBzbmJExI_bRcfg_cruTkLv3UCC4FkgJUbVeaGSLNgo3nnjyMdTps5vH6HWMFRebg7MX6bPkop3Ovy5GHu_d2yZ1gegSI0B-WQWN_kiVwP92lAfcwBLyySPuOPAEv9DToG36IoIT_A4vRtt5LFPR9RDuoOAsvWCxErsvJUvJb05PnfwlY9z1LuaEthnnrwNtebmpb9dXCkWvHArfF5_swjS5vVK6N1riRVBbsonshMpPfmnkOgSbd_yG1XUnW1B9phWjITu1oktS4vX9SdqKg0NE5T6dTnLYDr9HcXQY_l4nmbINrpDPS7qIMJikkr6FouAUd1oh6OwJE2luj_P8Ni4fxKBU8uDVm63fXZUsdp4tIyjD8j51zNAcr5aBrCfrF1pKzhJGhhzodPMtuNqSVk2_AKEAzu6W5FwH7ofrEILYfhtQeTzBeQTgfom3aFD0VlwcLzjHcNX84ZF7g7tlwr17dha7XHsv5dfzP4C05OaLLWr7V3NWdO6b_1Rw=s594-no?authuser=0
+       " style="width:20vw; height:20vw"  />  
+     
        <div id="div">
          <table>  
            <colgroup>
@@ -612,12 +743,12 @@ array.push({
            </colgroup>  
            <thead>
              <tr>
+               <td colspan="20">${today}</td>
+             </tr>
+             <tr>
                <th colspan="20">Relatório de Vendas</th>
              </tr>
-             <tr>
-               <th id="showDate" colspan="20"></th>
-             </tr>
-             <tr>
+              <tr>
                <td colspan="1" rowspan="3">Produto</td>
                <td colspan="1" rowspan="3">Preço</td>
                <td colspan="1" rowspan="3">Abastecimento</td>
@@ -640,8 +771,35 @@ array.push({
             <tr>
             ${table}
             </tr>             
-           </tbody>  
-           <tfoot></tfoot>  
+           </tbody>
+
+
+
+
+
+           <tfoot>             
+             <tr>
+
+                <td colspan="2">Totais</td>
+
+                <td>abastecido</td>
+
+                <td>não vendidos</td>                
+
+                <td colspan="3">${totais_vendidos_dn}</td>
+
+                <td colspan="4">total dn</td>
+
+                <td colspan="3">${totais_vendidos_ct}</td>
+
+                <td colspan="4">total dn</td>
+
+                <td colspan="1">${totais_recebidos}</td>
+
+            </tr>
+           </tfoot>  
+
+
          </table>  
        </div>  
      </body>
@@ -702,7 +860,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
  <View style={Estilos.viewAbastecer}>
 
      <Image 
-       source={require('../assets/banoffee.jpg')}
+       source={require('../assets/banoffee.png')}
        style={Estilos.viewAbastecerImg}/>        
     
 
@@ -740,7 +898,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
  </View>
 
   <View style={Estilos.viewInfo}>
-   <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoOne.count}   Banoffees `}</Text>      
+   <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoOne.count} Banoffee(s) `}</Text>      
   </View>
 
   <View style={Estilos.viewVendas}> 
@@ -784,7 +942,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
  <View style={Estilos.viewAbastecer}>
   
      <Image 
-       source={require('../assets/pudim.png')}
+       source={require('../assets/bombom.png')}
        style={Estilos.viewAbastecerImg}
      />      
 
@@ -826,7 +984,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
 
 
   <View style={Estilos.viewInfo}>
-      <Text style={Estilos.textInfo}>{`  Disponivel : ${produtoTwo.count}   Puddins`}</Text>     
+      <Text style={Estilos.textInfo}>{`  Disponivel : ${produtoTwo.count} Bombon(s) Aberto(s)`}</Text>     
    </View>
 
   <View style={Estilos.viewVendas}> 
@@ -872,7 +1030,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
   <View style={Estilos.viewAbastecer}>
   
     <Image 
-       source={require('../assets/banoffee.jpg')}
+       source={require('../assets/brigadeirao.png')}
        style={Estilos.viewAbastecerImg}
      />        
       
@@ -913,7 +1071,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
   </View>
 
   <View style={Estilos.viewInfo}>
-      <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoThree.count}   Mousses `}</Text>      
+      <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoThree.count} Brigadeirão(s)  `}</Text>      
   </View>
 
   <View style={Estilos.viewVendas}> 
@@ -957,7 +1115,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
   <View style={Estilos.viewAbastecer}>
   
     <Image 
-       source={require('../assets/banoffee.jpg')}
+       source={require('../assets/geleia_morango.png')}
        style={Estilos.viewAbastecerImg}
      />        
       
@@ -998,7 +1156,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
   </View>
 
   <View style={Estilos.viewInfo}>
-      <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoFour.count}   Mousses `}</Text>      
+      <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoFour.count} Geleia(s) de Morango  `}</Text>      
   </View>
 
   <View style={Estilos.viewVendas}> 
@@ -1037,17 +1195,109 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
 
 
 
+{/* produto_five */}
+
+
+<View style={Estilos.containnerProduto}>
+
+  <View style={Estilos.viewAbastecer}>
+  
+    <Image 
+       source={require('../assets/abacaxi.png')}
+       style={Estilos.viewAbastecerImg}
+     />        
+      
+
+    <LinearGradient
+  colors={['#a73737', '#F00000']} 
+ style={Estilos.gradientTouchXL}> 
+  <TouchableOpacity onPress={(value)=>setAbastecer(prod_five, produtoFive.abastecimento) &     getAbastecer(prod_five) }>
+    <Text style={Estilos.touchText}>Abastecer</Text>
+  </TouchableOpacity>
+ </LinearGradient>
+
+ <LinearGradient
+  colors={['#a73737', '#F00000']} 
+ style={Estilos.gradientTouchM}> 
+  <TouchableOpacity onPress={(value)=>setZerar(prod_five, "0") & getZerar(prod_five) }>
+    <Text style={Estilos.touchText}>zerar</Text>
+  </TouchableOpacity>
+  </LinearGradient>
+
+
+  <LinearGradient
+  colors={['#a73737', '#F00000']} 
+ style={Estilos.gradientTouchS}> 
+  <TouchableOpacity onPress={(value)=>setAdd(prod_five, "1") & getAdd(prod_five) }>
+    <Text style={Estilos.touchText}>+ 1</Text>
+  </TouchableOpacity>
+ </LinearGradient>
+
+ <LinearGradient
+  colors={['#a73737', '#F00000']} 
+ style={Estilos.gradientTouchS}> 
+  <TouchableOpacity onPress={(value)=>setRemove(prod_five, "1") & getRemove(prod_five) }>
+    <Text style={Estilos.touchText}>- 1</Text>
+  </TouchableOpacity>  
+ </LinearGradient>      
+      
+  </View>
+
+  <View style={Estilos.viewInfo}>
+      <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoFive.count}  Abacaxi(s) `}</Text>      
+  </View>
+
+  <View style={Estilos.viewVendas}> 
+    
+     <Text style={Estilos.textVendas}>Vendas</Text>    
+
+    <LinearGradient
+  colors={['#a73737', '#F00000']} 
+ style={Estilos.gradientTouchL}> 
+    <TouchableOpacity onPress={(value)=>setPgtoDn(prod_five, "1") & getPgtoDn(prod_five) }>
+    <Text style={Estilos.touchText}>Dinheiro</Text>
+  </TouchableOpacity>
+  </LinearGradient>
+
+
+  <LinearGradient
+  colors={['#a73737', '#F00000']} 
+ style={Estilos.gradientTouchL}> 
+  <TouchableOpacity onPress={(value)=>setPgtoCt(prod_five, "1") & getPgtoCt(prod_five) }>
+    <Text style={Estilos.touchText}>Cartão</Text>
+  </TouchableOpacity>
+  </LinearGradient>
+
+  </View>
+
+
+  <View style={Estilos.viewSubTotal}> 
+  <Text style={Estilos.textInfo}>{`Valor em dinheiro R$ ${produtoFive .pgtoDn},00  ${produtoFive.qtdDn}  vendas`}</  Text>
+  <Text style={Estilos.textInfo}>{`Valor em cartão R$ ${produtoFive.pgtoCt},00  ${produtoFive.qtdCt}  vendas`}</Text>      
+  </View>
+
+</View>
+
+
+
+
+
+
+
+
+
+
 
 {/* acrecentar daqui para cima */}
 
  
  <View style={Estilos.viewAmount}>
 
-  <Text style={Estilos.textInfo}>{`Valor total Dinheiro R$ ${produtoOne.pgtoDn + produtoTwo.pgtoDn + produtoThree.pgtoDn + produtoFour.pgtoDn} ,00 `}</Text>
+  <Text style={Estilos.textInfo}>{`Valor total Dinheiro R$ ${produtoOne.pgtoDn + produtoTwo.pgtoDn + produtoThree.pgtoDn + produtoFour.pgtoDn + produtoFive.pgtoDn } ,00 `}</Text>
 
-  <Text style={Estilos.textInfo}>{`Valor total Cartões R$ ${produtoOne.pgtoCt + produtoTwo.pgtoCt + produtoThree.pgtoCt + produtoFour.pgtoCt} ,00 `}</Text>
+  <Text style={Estilos.textInfo}>{`Valor total Cartões R$ ${produtoOne.pgtoCt + produtoTwo.pgtoCt + produtoThree.pgtoCt + produtoFour.pgtoCt + produtoFive.pgtoCt} ,00 `}</Text>
 
-  <Text style={Estilos.textInfo}>{`Valor total R$ ${produtoOne.totalAll + produtoTwo.totalAll + produtoThree.totalAll + produtoFour.totalAll} ,00 `}</Text>
+  <Text style={Estilos.textInfo}>{`Valor total R$ ${produtoOne.totalAll + produtoTwo.totalAll + produtoThree.totalAll + produtoFour.totalAll + produtoFive.totalAll} ,00 `}</Text>
 
 
 
