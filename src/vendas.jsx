@@ -30,16 +30,16 @@ const [selectedPrinter, setSelectedPrinter] = React.useState();
 
 
 
-const prod_one = 'banoffee';
-const prod_two = 'bombom';
-const prod_three ='brigadeirao';
-const prod_four ='morango';
-const prod_five ='abacaxi';
-const prod_six ='abacaxi';
+const prod_one = 'abacaxi';
+const prod_two = 'banoffee';
+const prod_three ='bombom';
+const prod_four ='brigadeirao';
+const prod_five ='cheasecake';
+const prod_six ='geleia';
 const prod_seven ='limao';
 const prod_eight ='ninho';
 const prod_nine ='pudim';
-const prod_ten ='mousse';
+
 
 
 
@@ -164,20 +164,6 @@ const[produtoNine, setProdutoNine] = useState({
 });
 
 
-const[produtoTen, setProdutoTen] = useState({
-  count:0, 
-  preco:15,
-  pgtoDn:0,
-  qtdDn:0,
-  totalDn:0,
-  pgtoCt:0,
-  qtdCt:0,
-  totalCt:0,
-  totalAll:0,
-  abastecimento:'10'
-});
-
-
 
 
     // metodos asynStorage
@@ -239,7 +225,17 @@ const getAbastecer = async(key)=>{
                 produtoFive,qtdCt:(produtoFive.qtdCt =0),
                 produtoFive,totalAll:(produtoFive.totalAll =0)           
              })  
-             break;   
+             break; 
+             case prod_six: 
+             setProdutoSix({
+             ...produtoSix, count :(quantidade),
+               produtoSix,pgtoDn:(produtoSix.pgtoDn = 0) ,
+               produtoSix,qtdDn:(produtoSix.qtdDn = 0),
+               produtoSix,pgtoCt:(produtoSix.pgtoCt =0),
+               produtoSix,qtdCt:(produtoSix.qtdCt =0),
+               produtoSix,totalAll:(produtoSix.totalAll =0)           
+            })  
+            break;   
            }
          }
 
@@ -278,6 +274,11 @@ const getAbastecer = async(key)=>{
        ...produtoFive,count:(produtoFive.count +valor)
      }) 
      break;
+     case prod_six:       
+      setProdutoSix({
+       ...produtoSix,count:(produtoSix.count +valor)
+     }) 
+     break;
     }   
   }
 
@@ -314,6 +315,12 @@ const getAbastecer = async(key)=>{
      ...produtoFive,count:(produtoFive.count -valor)
    }) 
   :false;
+  key==prod_six && produtoSix.count>=1 ?
+   setProdutoSix({
+     ...produtoSix,count:(produtoSix.count -valor)
+   }) 
+  :false;
+
   }
 
 
@@ -376,7 +383,18 @@ const getAbastecer = async(key)=>{
                produtoFive,totalAll:(produtoFive.totalAll =valor)
           })
           break;
-    }
+          case prod_six:
+            setProdutoSix ({
+              ...produtoSix,count:(valor),
+                 produtoSix,pgtoDn:(produtoSix.pgtoDn = valor) ,
+                 produtoSix,qtdDn:(produtoSix.qtdDn = valor),
+                 produtoSix,pgtoCt:(produtoSix.pgtoCt =valor),
+                 produtoSix,qtdCt:(produtoSix.qtdCt =valor),
+                 produtoSix,totalAll:(produtoSix.totalAll =valor)
+            })
+            break;
+          
+  }
 }
   
    
@@ -429,6 +447,15 @@ const getPgtoDn = async(key)=>{
        produtoFive,totalAll:(produtoFive.totalAll = produtoFive.pgtoDn + produtoFive.pgtoCt +produtoFive.preco )
    }) 
    :false;
+   key == prod_six && produtoSix.count>=1?
+   setProdutoSix({
+    ...produtoSix,count:(produtoSix.count -valor) , 
+       produtoSix,pgtoDn:(produtoSix.pgtoDn + produtoFour.preco),
+       produtoSix,qtdDn:(produtoSix.qtdDn+valor),
+       produtoSix,totalAll:(produtoSix.totalAll = produtoSix.pgtoDn + produtoSix.pgtoCt +produtoSix.preco )
+   }) 
+   :false;
+  
   }
 
 
@@ -484,9 +511,16 @@ const getPgtoCt = async(key)=>{
        produtoFive,totalAll:(produtoFive.totalAll = produtoFive.pgtoCt + produtoFive.pgtoDn +produtoFive.preco )
    })
    :false;
-}
+   key == prod_six && produtoSix.count>=1?
+   setProdutoSix({
+    ...produtoSix,count:(produtoSix.count -valor) , 
+       produtoSix,pgtoCt:(produtoSix.pgtoCt + produtoFive.preco),
+       produtoSix,qtdCt:(produtoSix.qtdCt+valor),
+       produtoSix,totalAll:(produtoSix.totalAll = produtoSix.pgtoCt + produtoSix.pgtoDn +produtoSix.preco )
+   })
+   :false;
 
-
+  }
 
 /* async function clearStorag () {
   await AsyncStorage.clear();
@@ -614,7 +648,8 @@ const array = [];
   ctvalor:" R$ "+produtoSix.pgtoCt,
   total:" R$ "+produtoSix.totalAll
 }); 
- }
+
+}
 
 
  var totais_vendidos_dn    = produtoOne.qtdDn + produtoTwo.qtdDn + produtoThree.qtdDn + produtoFour.qtdDn + produtoFive.qtdDn  +  produtoSix.qtdDn ;  
@@ -860,7 +895,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
  <View style={Estilos.viewAbastecer}>
 
      <Image 
-       source={require('../assets/banoffee.png')}
+       source={require('../assets/abacaxi.png')}
        style={Estilos.viewAbastecerImg}/>        
     
 
@@ -898,7 +933,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
  </View>
 
   <View style={Estilos.viewInfo}>
-   <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoOne.count} Banoffee(s) `}</Text>      
+   <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoOne.count} ${prod_one}(s) `}</Text>      
   </View>
 
   <View style={Estilos.viewVendas}> 
@@ -942,7 +977,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
  <View style={Estilos.viewAbastecer}>
   
      <Image 
-       source={require('../assets/bombom.png')}
+       source={require('../assets/banoffee.png')}
        style={Estilos.viewAbastecerImg}
      />      
 
@@ -984,7 +1019,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
 
 
   <View style={Estilos.viewInfo}>
-      <Text style={Estilos.textInfo}>{`  Disponivel : ${produtoTwo.count} Bombon(s) Aberto(s)`}</Text>     
+      <Text style={Estilos.textInfo}>{`  Disponivel : ${produtoTwo.count} ${prod_two}(s)`}</Text>     
    </View>
 
   <View style={Estilos.viewVendas}> 
@@ -1030,7 +1065,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
   <View style={Estilos.viewAbastecer}>
   
     <Image 
-       source={require('../assets/brigadeirao.png')}
+       source={require('../assets/bombom.png')}
        style={Estilos.viewAbastecerImg}
      />        
       
@@ -1071,7 +1106,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
   </View>
 
   <View style={Estilos.viewInfo}>
-      <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoThree.count} Brigadeirão(s)  `}</Text>      
+      <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoThree.count} ${prod_three}(s)  `}</Text>      
   </View>
 
   <View style={Estilos.viewVendas}> 
@@ -1115,7 +1150,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
   <View style={Estilos.viewAbastecer}>
   
     <Image 
-       source={require('../assets/geleia_morango.png')}
+       source={require('../assets/brigadeirao.png')}
        style={Estilos.viewAbastecerImg}
      />        
       
@@ -1156,7 +1191,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
   </View>
 
   <View style={Estilos.viewInfo}>
-      <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoFour.count} Geleia(s) de Morango  `}</Text>      
+      <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoFour.count} ${prod_four}(s) `}</Text>      
   </View>
 
   <View style={Estilos.viewVendas}> 
@@ -1203,7 +1238,7 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
   <View style={Estilos.viewAbastecer}>
   
     <Image 
-       source={require('../assets/abacaxi.png')}
+       source={require('../assets/cheasecake.png')}
        style={Estilos.viewAbastecerImg}
      />        
       
@@ -1244,7 +1279,95 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
   </View>
 
   <View style={Estilos.viewInfo}>
-      <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoFive.count}  Abacaxi(s) `}</Text>      
+      <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoFive.count}  ${prod_five}(s) `}</Text>      
+  </View>
+
+  <View style={Estilos.viewVendas}> 
+    
+     <Text style={Estilos.textVendas}>Vendas</Text>    
+
+    <LinearGradient
+  colors={['#a73737', '#F00000']} 
+ style={Estilos.gradientTouchL}> 
+    <TouchableOpacity onPress={(value)=>setPgtoDn(prod_five, "1") & getPgtoDn(prod_five) }>
+    <Text style={Estilos.touchText}>Dinheiro</Text>
+  </TouchableOpacity>
+  </LinearGradient>
+
+
+  <LinearGradient
+  colors={['#a73737', '#F00000']} 
+ style={Estilos.gradientTouchL}> 
+  <TouchableOpacity onPress={(value)=>setPgtoCt(prod_five, "1") & getPgtoCt(prod_five) }>
+    <Text style={Estilos.touchText}>Cartão</Text>
+  </TouchableOpacity>
+  </LinearGradient>
+
+  </View>
+
+
+  <View style={Estilos.viewSubTotal}> 
+  <Text style={Estilos.textInfo}>{`Valor em dinheiro R$ ${produtoFive .pgtoDn},00  ${produtoFive.qtdDn}  vendas`}</  Text>
+  <Text style={Estilos.textInfo}>{`Valor em cartão R$ ${produtoFive.pgtoCt},00  ${produtoFive.qtdCt}  vendas`}</Text>      
+  </View>
+
+</View>
+
+
+
+
+
+
+{/* produto_six */}
+
+
+<View style={Estilos.containnerProduto}>
+
+  <View style={Estilos.viewAbastecer}>
+  
+    <Image 
+       source={require('../assets/geleia.png')}
+       style={Estilos.viewAbastecerImg}
+     />        
+      
+
+    <LinearGradient
+  colors={['#a73737', '#F00000']} 
+ style={Estilos.gradientTouchXL}> 
+  <TouchableOpacity onPress={(value)=>setAbastecer(prod_five, produtoFive.abastecimento) &     getAbastecer(prod_five) }>
+    <Text style={Estilos.touchText}>Abastecer</Text>
+  </TouchableOpacity>
+ </LinearGradient>
+
+ <LinearGradient
+  colors={['#a73737', '#F00000']} 
+ style={Estilos.gradientTouchM}> 
+  <TouchableOpacity onPress={(value)=>setZerar(prod_five, "0") & getZerar(prod_five) }>
+    <Text style={Estilos.touchText}>zerar</Text>
+  </TouchableOpacity>
+  </LinearGradient>
+
+
+  <LinearGradient
+  colors={['#a73737', '#F00000']} 
+ style={Estilos.gradientTouchS}> 
+  <TouchableOpacity onPress={(value)=>setAdd(prod_five, "1") & getAdd(prod_five) }>
+    <Text style={Estilos.touchText}>+ 1</Text>
+  </TouchableOpacity>
+ </LinearGradient>
+
+ <LinearGradient
+  colors={['#a73737', '#F00000']} 
+ style={Estilos.gradientTouchS}> 
+  <TouchableOpacity onPress={(value)=>setRemove(prod_five, "1") & getRemove(prod_five) }>
+    <Text style={Estilos.touchText}>- 1</Text>
+  </TouchableOpacity>  
+ </LinearGradient>      
+      
+  </View>
+
+  <View style={Estilos.viewInfo}>
+      <Text style={Estilos.textInfo}>{`  Disponivel :  ${produtoFive.count}  ${prod_five}(s) `}</Text>      
   </View>
 
   <View style={Estilos.viewVendas}> 
@@ -1293,11 +1416,11 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
  
  <View style={Estilos.viewAmount}>
 
-  <Text style={Estilos.textInfo}>{`Valor total Dinheiro R$ ${produtoOne.pgtoDn + produtoTwo.pgtoDn + produtoThree.pgtoDn + produtoFour.pgtoDn + produtoFive.pgtoDn } ,00 `}</Text>
+  <Text style={Estilos.textInfo}>{`Valor total Dinheiro R$ ${produtoOne.pgtoDn + produtoTwo.pgtoDn + produtoThree.pgtoDn + produtoFour.pgtoDn + produtoFive.pgtoDn + produtoSix.pgtoDn} ,00 `}</Text>
 
-  <Text style={Estilos.textInfo}>{`Valor total Cartões R$ ${produtoOne.pgtoCt + produtoTwo.pgtoCt + produtoThree.pgtoCt + produtoFour.pgtoCt + produtoFive.pgtoCt} ,00 `}</Text>
+  <Text style={Estilos.textInfo}>{`Valor total Cartões R$ ${produtoOne.pgtoCt + produtoTwo.pgtoCt + produtoThree.pgtoCt + produtoFour.pgtoCt + produtoFive.pgtoCt + produtoSix.pgtoCt} ,00 `}</Text>
 
-  <Text style={Estilos.textInfo}>{`Valor total R$ ${produtoOne.totalAll + produtoTwo.totalAll + produtoThree.totalAll + produtoFour.totalAll + produtoFive.totalAll} ,00 `}</Text>
+  <Text style={Estilos.textInfo}>{`Valor total R$ ${produtoOne.totalAll + produtoTwo.totalAll + produtoThree.totalAll + produtoFour.totalAll + produtoFive.totalAll + produtoSix.totalAll} ,00 `}</Text>
 
 
 
