@@ -162,7 +162,7 @@ gradientTouchS:{
         height:80,
         backgroundColor: 'rgba(255, 255, 223, 0.7)',         
         justifyContent:'space-evenly',
-        alignItems:'center',
+        alignItems:'center', 
         marginTop:10,
         borderWidth:2,
         borderStyle:'solid',
