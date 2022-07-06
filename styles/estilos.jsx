@@ -171,9 +171,14 @@ gradientTouchS:{
     },
 
 
+   viewShare:{
+    flexDirection: "row",
+    padding:20,    
+   },
 
-
-     
+    btnShare:{
+       marginStart:20
+    } 
      
      
      

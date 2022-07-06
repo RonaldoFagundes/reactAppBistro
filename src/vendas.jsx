@@ -7,6 +7,7 @@ import * as Print from 'expo-print';
 import { shareAsync } from 'expo-sharing';
 import AsyncStorageSales from '@react-native-async-storage/async-storage';
 
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 
 export default function Vendas(){
@@ -1892,12 +1893,26 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
 
   </View>
 
+<View style={Estilos.viewShare}>
+
+ <TouchableOpacity onPress={printToFile} style={Estilos.viewShare}>
+    <Ionicons name ={"share"}size ={40} color ={"#FFC133"}/>  
+ </TouchableOpacity>
+
+ <TouchableOpacity onPress={print} style={Estilos.viewShare}>     
+    <Ionicons name ={"print"}size ={40} color ={"#FFC133"}/>
+ </TouchableOpacity>
+
+</View>
 
 
-<LinearGradient
+{/* <LinearGradient
   colors={['#a73737', '#F00000']} 
  style={Estilos.gradientTouchXL}>
   <TouchableOpacity onPress={printToFile}>
+
+  <Ionicons name ={"share"}size ={20} color ={"red"}/>
+
     <Text style={Estilos.touchText}>Share</Text>
   </TouchableOpacity>
  </LinearGradient>
@@ -1908,9 +1923,13 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
   colors={['#a73737', '#F00000']} 
  style={Estilos.gradientTouchXL}>
   <TouchableOpacity onPress={print}>
+     
+    <Ionicons name ={"print"}size ={20} color ={"red"}/>
+
     <Text style={Estilos.touchText}>Safe</Text>
+
   </TouchableOpacity>
- </LinearGradient>
+ </LinearGradient> */}
  
 
 

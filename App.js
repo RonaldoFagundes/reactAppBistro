@@ -45,6 +45,7 @@ initialRouteName='Sales'
    tabBarActiveTintColor:'rgba(125, 105, 53, 0.8)',
    tabBarInactiveTintColor:'rgba(125, 105, 53, 0.9)',
 
+  
 
 
    tabBarIcon : ( { color, size} ) => {
@@ -53,13 +54,15 @@ initialRouteName='Sales'
 
       switch(route.name){
         case "Relatorio":
-          iconName ="home" ;
-          color="brown";
+          iconName ="document" ;
+          size=40;
+          color="brown";         
           break;
         case "Sales":
           //iconName="list" ;
-          iconName="globe" ;
-          color="brown";
+          iconName="home" ;
+          size=40;
+          color="brown";         
          break;
          /* case "Estoque":
           iconName="grid";
