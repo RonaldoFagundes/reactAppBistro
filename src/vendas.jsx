@@ -376,6 +376,98 @@ const getAbastecer = async(key)=>{
   }
 
 
+    /* metodo de reset */
+  const setReset = (Key,value)=>{
+    AsyncStorageSales.setItem(Key,value);
+  }
+
+  const getReset = async(key)=>{ 
+    const valor =  parseInt (await AsyncStorageSales.getItem(key));
+
+    setProdutoOne({
+      ...produtoOne,count:(valor),
+         produtoOne,pgtoDn:(produtoOne.pgtoDn = valor) ,
+         produtoOne,qtdDn:(produtoOne.qtdDn = valor),
+         produtoOne,pgtoCt:(produtoOne.pgtoCt =valor),
+         produtoOne,qtdCt:(produtoOne.qtdCt =valor),
+         produtoOne,totalAll:(produtoOne.totalAll =valor)
+    })
+
+    setProdutoTwo({
+      ...produtoTwo,count:(valor),
+         produtoTwo,pgtoDn:(produtoTwo.pgtoDn = valor) ,
+         produtoTwo,qtdDn:(produtoTwo.qtdDn = valor),
+         produtoTwo,pgtoCt:(produtoTwo.pgtoCt =valor),
+         produtoTwo,qtdCt:(produtoTwo.qtdCt =valor),
+         produtoTwo,totalAll:(produtoTwo.totalAll =valor)
+    })
+
+    setProdutoThree ({
+      ...produtoThree,count:(valor),
+         produtoThree,pgtoDn:(produtoThree.pgtoDn = valor) ,
+         produtoThree,qtdDn:(produtoThree.qtdDn = valor),
+         produtoThree,pgtoCt:(produtoThree.pgtoCt =valor),
+         produtoThree,qtdCt:(produtoThree.qtdCt =valor),
+         produtoThree,totalAll:(produtoThree.totalAll =valor)
+    })
+   
+      setProdutoFour ({
+        ...produtoFour,count:(valor),
+           produtoFour,pgtoDn:(produtoFour.pgtoDn = valor) ,
+           produtoFour,qtdDn:(produtoFour.qtdDn = valor),
+           produtoFour,pgtoCt:(produtoFour.pgtoCt =valor),
+           produtoFour,qtdCt:(produtoFour.qtdCt =valor),
+           produtoFour,totalAll:(produtoFour.totalAll =valor)
+      })
+   
+      setProdutoFive ({
+        ...produtoFive,count:(valor),
+           produtoFive,pgtoDn:(produtoFive.pgtoDn = valor) ,
+           produtoFive,qtdDn:(produtoFive.qtdDn = valor),
+           produtoFive,pgtoCt:(produtoFive.pgtoCt =valor),
+           produtoFive,qtdCt:(produtoFive.qtdCt =valor),
+           produtoFive,totalAll:(produtoFive.totalAll =valor)
+      })
+     
+        setProdutoSix ({
+          ...produtoSix,count:(valor),
+             produtoSix,pgtoDn:(produtoSix.pgtoDn = valor) ,
+             produtoSix,qtdDn:(produtoSix.qtdDn = valor),
+             produtoSix,pgtoCt:(produtoSix.pgtoCt =valor),
+             produtoSix,qtdCt:(produtoSix.qtdCt =valor),
+             produtoSix,totalAll:(produtoSix.totalAll =valor)
+        })
+       
+        setProdutoSeven ({
+          ...produtoSeven,count:(valor),
+             produtoSeven,pgtoDn:(produtoSeven.pgtoDn = valor) ,
+             produtoSeven,qtdDn:(produtoSeven.qtdDn = valor),
+             produtoSeven,pgtoCt:(produtoSeven.pgtoCt =valor),
+             produtoSeven,qtdCt:(produtoSeven.qtdCt =valor),
+             produtoSeven,totalAll:(produtoSeven.totalAll =valor)
+        })
+      
+        setProdutoEight ({
+          ...produtoEight,count:(valor),
+             produtoEight,pgtoDn:(produtoEight.pgtoDn = valor) ,
+             produtoEight,qtdDn:(produtoEight.qtdDn = valor),
+             produtoEight,pgtoCt:(produtoEight.pgtoCt =valor),
+             produtoEight,qtdCt:(produtoEight.qtdCt =valor),
+             produtoEight,totalAll:(produtoEight.totalAll =valor)
+        })
+        
+        setProdutoNine ({
+          ...produtoNine,count:(valor),
+             produtoNine,pgtoDn:(produtoNine.pgtoDn = valor) ,
+             produtoNine,qtdDn:(produtoNine.qtdDn = valor),
+             produtoNine,pgtoCt:(produtoNine.pgtoCt =valor),
+             produtoNine,qtdCt:(produtoNine.qtdCt =valor),
+             produtoNine,totalAll:(produtoNine.totalAll =valor)
+        })
+
+  }
+
+
 
 
   const setZerar =  (key,value)=>{
@@ -1902,6 +1994,16 @@ colors={['rgba(251, 195, 95, 1.0)', 'rgba(251, 195, 95, 0.5)']}  style={{flex:1}
  <TouchableOpacity onPress={print} style={Estilos.viewShare}>     
     <Ionicons name ={"print"}size ={40} color ={"#FFC133"}/>
  </TouchableOpacity>
+
+
+
+  {/* btn resetar 'trocar icon' */}
+ <TouchableOpacity
+  onPress={ (value)=>setReset(all,"0") & getReset(all)}  
+    style={Estilos.viewShare}>
+  <Ionicons name ={"share"}size ={40} color ={"#FFC133"}/>  
+ </TouchableOpacity>
+
 
 </View>
 
