@@ -33,4 +33,5 @@ app react-native
 
 &nbsp;
 
-## Baixe aqui o :point_right:[apk](https://drive.google.com/file/d/1XgBlm61e_UmVv5qAppUnqROhyfbElswM/view?usp=sharing)
+## Link para download do aplicativo :point_down:
+# [apk](https://drive.google.com/file/d/1XgBlm61e_UmVv5qAppUnqROhyfbElswM/view?usp=sharing)
