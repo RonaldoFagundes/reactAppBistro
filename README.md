@@ -22,8 +22,8 @@ app react-native
    &nbsp; 
      
   &nbsp;
-  :point_right:    
-  # [youtube :](https://www.youtube.com/watch?v=1hqljkfixiw)
+  :point_right:
+  [youtube :](https://www.youtube.com/watch?v=1hqljkfixiw)
   &nbsp;  
 
    ## Imagens app :
