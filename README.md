@@ -19,16 +19,11 @@ app react-native
  - expo-print
  - expo-sharing  
  - expo-linear-gradient 
-   &nbsp;
-   
-   
-  ## youtube :
-  &nbsp;
-  :point_right:
-  [assistir](https://www.youtube.com/watch?v=1hqljkfixiw)  
-  &nbsp;
-   
-
+   &nbsp; 
+     
+  &nbsp;    
+  # [youtube :](https://www.youtube.com/watch?v=1hqljkfixiw)
+  &nbsp;  
 
    ## Imagens app :
    &nbsp;
