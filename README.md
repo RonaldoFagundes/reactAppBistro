@@ -20,7 +20,8 @@ app react-native
  - expo-sharing  
  - expo-linear-gradient 
    &nbsp; 
-     
+
+  ##   
   &nbsp;
   :point_right:
   [youtube :](https://www.youtube.com/watch?v=1hqljkfixiw)
