@@ -21,7 +21,8 @@ app react-native
  - expo-linear-gradient 
    &nbsp; 
      
-  &nbsp;    
+  &nbsp;
+  :point_right:    
   # [youtube :](https://www.youtube.com/watch?v=1hqljkfixiw)
   &nbsp;  
 
