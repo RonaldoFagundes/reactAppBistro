@@ -3,7 +3,7 @@ app react-native
 
 &nbsp;
 
- - Gerenciador de vendas
+  - Gerenciador de vendas
   - Abastecimento
   - Vendas
   - Formas de Pagamento
@@ -18,10 +18,18 @@ app react-native
  - @react-native-async-storage
  - expo-print
  - expo-sharing  
- - expo-linear-gradient
- 
+ - expo-linear-gradient 
    &nbsp;
    
+   
+  ## youtube :
+  &nbsp;
+  :point_right:
+  [assistir](https://www.youtube.com/watch?v=1hqljkfixiw)  
+  &nbsp;
+   
+
+
    ## Imagens app :
    &nbsp;
    
